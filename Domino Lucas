@@ -1,5 +1,5 @@
 from typing import Any
-
+from random import *
 
 class Domino():
     def __init__(self, val1, val2):
@@ -38,19 +38,19 @@ class JeuDomino():
         self.j2=j2
         self.plateau=plateau
         self.pioche=pioche
-    
+    #\\\\\\\\\getters/////////#
     def __getj1__(self):
         return self.j1
     
     def __getj2__(self):
         return self.j2    
     
-    def __getjpioche__(self):
+    def __getpioche__(self):
         return self.pioche       
     
     def __getplateau__(self):
         return self.plateau
-    
+    #\\\\\\\\\setters/////////#
     def __setj1__(self,newj1):
         self.j1=newj1
     
@@ -62,3 +62,12 @@ class JeuDomino():
     
     def __setplateau__(self,newplateau):
         self.plateau=newplateau
+    #\\\\\\\\\Méthodes/////////#
+    def melanger(self):
+        shuffle(self.pioche)
+    def distribuer(self):
+        for i in range(7):
+            self.j1.append(self.pioche.pop())
+        for j in range(7):
+            self.j2.append(self.pioche.pop())
+        
