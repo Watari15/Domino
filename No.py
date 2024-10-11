@@ -20,4 +20,4 @@ class Domino():
         if self.double(self)==True:
             print(" ---\n|" + self.val1 + "|\n---\n|" + self.val2 + "|\n---")
         else:
-            print("---------\n| "+ self.val1 +" | "+ self.val2 +" |\n---------")
+            print("---------\n| "+ str(self.val1) +" | "+ str(self.val2) +" |\n---------")
