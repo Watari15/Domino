@@ -1,4 +1,4 @@
-from random import shuffle
+from random import *
 
 class Domino():
     def __init__(self,val1,val2):
@@ -53,7 +53,8 @@ class JeuDeDomino():
         shuffle(self.pioche)
     
     def ditribuer(self):
-        pass
+        for i in range(7):
+            self.j1.append(self.pioche.pop())
     
     def afficher_j1(self):
         pass
