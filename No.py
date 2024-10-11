@@ -1,3 +1,5 @@
+from random import shuffle
+
 class Domino():
     def __init__(self,val1,val2):
         """
@@ -46,20 +48,64 @@ class JeuDeDomino():
         self.plateau = plateau
     
     #////////Methodes////////
-    
+
     def melanger(self):
-        pass
+        shuffle(self.pioche)
+    
     def ditribuer(self):
         pass
+    
     def afficher_j1(self):
         pass
+    
     def affichjer_j2(self):
         pass
+    
     def afficher_plateau(self):
         pass
+    
     def tour_j1(self):
         pass
+    
     def tour_j2(self):
         pass
+    
     def jouer(self):
         pass
+
+    #////////Guetters////////
+
+    def __getj1__(self):
+        return self.j1
+    
+    def __getj2__(self):
+        return self.j2    
+    
+    def __getpioche__(self):
+        return self.pioche       
+    
+    def __getplateau__(self):
+        return self.plateau
+    
+    #////////Setters////////
+
+    def __setj1__(self,newj1):
+        self.j1=newj1
+    
+    def __setj2__(self,newj2):
+        self.j2=newj2
+    
+    def __setpioche__(self,newpioche):
+        self.pioche=newpioche
+    
+    def __setplateau__(self,newplateau):
+        self.plateau=newplateau
+        
+        
+        
+        # code selim
+        """
+        for i in range(7):
+            for j in range (i,7):
+                print(f"{i},{j}")
+        """
