@@ -78,5 +78,6 @@ class JeuDomino():
     def distribuer(self):
         for i in range(7):
             self.j1.append(self.pioche.pop())
-
+        for j in range(7):
+            self.j2.append(self.pioche.pop())
 
