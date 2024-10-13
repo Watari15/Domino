@@ -106,7 +106,7 @@ class JeuDomino():
     
     def tour_j1(self):
         print("Joueur 1, c'est votre tour !")
-        choix = input("Choisissez une option :\n 1. Passer | \n2. Piocher | \n3. Jouer un domino\n")
+        choix = input("Choisissez une option :\n 1. Passer | \n2. Piocher | \n3. Jouer un domino |\n")
 
         if choix == '1':
             print("Le joueur 1 passe son tour \n")
@@ -118,3 +118,7 @@ class JeuDomino():
                 domino_pioche = self.pioche.pop()
                 self.j1.append(domino_pioche)
                 print(f"Joueur 1 a pioché le domino : [{domino_pioche.val1} | {domino_pioche.val2}]")
+                
+pioche = [Domino(i, j) for i in range(7) for j in range(i, 7)]
+jeu = JeuDomino(pioche)
+
