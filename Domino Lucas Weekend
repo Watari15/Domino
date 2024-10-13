@@ -122,3 +122,4 @@ class JeuDomino():
 pioche = [Domino(i, j) for i in range(7) for j in range(i, 7)]
 jeu = JeuDomino(pioche)
 
+ 
