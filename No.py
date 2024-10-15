@@ -110,3 +110,8 @@ class JeuDeDomino():
             for j in range (i,7):
                 print(f"{i},{j}")
         """
+            def retourner(self):
+        """
+        fonction qui permet de retourner un domino
+        """
+        return self[::-1]
