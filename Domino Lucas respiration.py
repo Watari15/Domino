@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any 
 from random import *
 
 class Domino():
@@ -80,4 +80,68 @@ class JeuDomino():
             self.j1.append(self.pioche.pop())
         for j in range(7):
             self.j2.append(self.pioche.pop())
+
+    def afficher_j1(self):
+        print("Joueur 1, voici votre main : \n")
+        for domino in self.j1:
+            domino.affichage()
+        print("********************************************")
+    
+    def afficher_j2(self):
+        print("Joueur 2, voici votre main : \n")
+        for domino in self.j2:
+            domino.affichage()
+        print("********************************************")    
+
+    def afficher_plateau(self):
+        if not self.plateau:
+            print("Le plateau est vide.")
+        elif len(self.plateau) == 1:
+            print("Le plateau contient un seul domino :")
+            self.plateau[0].affichage()
+        else:
+            print("Le plateau contient les dominos suivants :")
+            for domino in self.plateau:
+                domino.affichage()
+    
+    def tour_j1(self):
+        print("Joueur 1, c'est votre tour !")
+        choix = str(input("Choisissez une option :\n \n1. Piocher | \n2. Jouer un domino |\n"))
+        if choix == '1':
+            if not self.pioche:
+                print("La pioche est vide. Impossible de piocher.")
+            else:
+                domino_pioche = self.pioche.pop()
+                self.j1.append(domino_pioche)
+                print(f"Joueur 1 a pioché le domino : [{domino_pioche.val1} | {domino_pioche.val2}]")
+        elif choix=='2':
+            piece=int(input("Veuillez choisir la pièce a jouer ---->"))
+            valgauche=self.j1[piece-1].__getgauche__()
+            valdroite=self.j1[piece-1].__getdroite__()
+            cote=input("De quel côté veux-tu placer le domino ? ---> gauche ou droite ")
+            if cote.lower()=="gauche":
+                dominogauche=self.plateau[0]
+                if dominogauche.__getgauche__()==valgauche or dominogauche.__getgauche__()==valdroite or dominogauche.__getdroite__() == valgauche or dominogauche.__getdroite__() == valdroite:
+                    self.plateau.insert(0,self.j1.pop(piece-1))
+                else:
+                    print("Le domino ne peut pas être placé car les valeurs ne correspondent pas")
+                    
+            elif cote.lower()=='droite':
+                dominodroite=self.plateau[-1]
+                if dominodroite.__getdroite__()==valgauche or dominodroite.__getdroite__()==valdroite or dominodroite.__getdroite__() == valgauche or dominodroite.__getdroite__() == valdroite:
+                    self.plateau.insert(0,self.j1.pop(piece-1))
+                else:
+                    print("Le domino ne peut pas être placé car les valeurs ne correspondent pas")
+                    
+
+
+                
+            
+                
+pioche = [Domino(i, j) for i in range(7) for j in range(i, 7)]
+jeu = JeuDomino(pioche)
+jeu.melanger()
+jeu.distribuer()
+jeu.plateau.append(pioche.pop())
+
 
