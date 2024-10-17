@@ -32,7 +32,6 @@ class Domino():
         Définit la valeur du côté gauche du domino.
         :param nouvellegauche: (int) La nouvelle valeur pour le côté gauche.
         """
-        assert isinstance(nouvellegauche, int), 'La valeur doit être un entier'
         self.val1 = nouvellegauche
 
     def __setdroite__(self, nouvelledroite):
@@ -40,7 +39,6 @@ class Domino():
         Définit la valeur du côté droit du domino.
         :param nouvelledroite: (int) La nouvelle valeur pour le côté droit.
         """        
-        assert isinstance(nouvelledroite, int), 'La valeur doit être un entier'
         self.val2 = nouvelledroite
 
     def double(self):
@@ -251,8 +249,9 @@ class JeuDomino():
             while piece not in choixn:
                 piece = int(input("Erreur vous n'avez pas rentré un chiffre ou alors ce domino n'existe pas, veuillez entrer le bon numéro de domino ---->"))
             
-            valgauche = self.j1[piece - 1].__getgauche__()
-            valdroite = self.j1[piece - 1].__getdroite__()
+            dominojoueur=self.j1[piece - 1]
+            valgauche = dominojoueur.__getgauche__()
+            valdroite = dominojoueur.__getdroite__()  
             dominogauche = self.plateau[0]
             dominodroite = self.plateau[-1]
             
@@ -262,16 +261,33 @@ class JeuDomino():
                 
                 while piece not in choixn:
                     piece = int(input("Erreur, veuillez entrer le numéro du domino ---->"))
-                
-                valgauche = self.j1[piece - 1].__getgauche__()
-                valdroite = self.j1[piece - 1].__getdroite__()                
+                dominojoueur=self.j1[piece - 1]
+                valgauche = dominojoueur.__getgauche__()
+                valdroite = dominojoueur.__getdroite__()                
             
             while True:
-                cote = input("De quel côté veux-tu placer le domino ? ---> gauche ou droite ")
+                cote = input("De quel côté veux-tu placer le domino ? ---> gauche ou droite (gauche c'est la haut de la console droite c'est le bas)")
                 
                 if cote.lower() == "gauche":
                     if dominogauche.__getgauche__() in (valgauche, valdroite) or dominogauche.__getdroite__() in (valgauche, valdroite):
                         self.plateau.insert(0, self.j1.pop(piece - 1))
+                        if dominogauche.__getgauche__() in (valgauche,'y'):
+                            if valgauche in (dominogauche.__getgauche__(),'y'):
+                                dominojoueur.__setgauche__("x")
+                                dominogauche.__setgauche__("x")
+                            if valdroite in (dominogauche.__getgauche__(),'y'):                           
+                                dominojoueur.__setdroite__("x")
+                                dominogauche.__setgauche__("x")
+                                
+                        elif dominogauche.__getdroite__() in (valgauche, valdroite):
+                            if valgauche in (dominogauche.__getdroite__(),'y'):
+                                dominojoueur.__setgauche__("x")
+                                dominogauche.__setdroite__("x")
+                            if valdroite in (dominogauche.__getdroite__(),'y'):                           
+                                dominojoueur.__setdroite__("x")
+                                dominogauche.__setdroite__("x")
+                            
+                        
                         print("Le joueur 1 a placé son domino à gauche")
                         sleep(2)
                         
@@ -283,6 +299,21 @@ class JeuDomino():
                 elif cote.lower() == 'droite':
                     if dominodroite.__getgauche__() in (valgauche, valdroite) or dominodroite.__getdroite__() in (valgauche, valdroite):
                         self.plateau.append(self.j1.pop(piece - 1))
+                        if dominodroite.__getgauche__() in (valgauche,'y'):
+                            if valgauche in (dominodroite.__getgauche__(),'y'):
+                                dominojoueur.__setgauche__("x")
+                                dominogauche.__setgauche__("x")
+                            if valdroite in (dominodroite.__getgauche__(),'y'):                           
+                                dominojoueur.__setdroite__("x")
+                                dominogauche.__setgauche__("x")
+                                
+                        elif dominodroite.__getdroite__() in (valgauche, valdroite):
+                            if valgauche in (dominodroite.__getdroite__(),'y'):
+                                dominojoueur.__setgauche__("x")
+                                dominodroite.__setdroite__("x")
+                            if valdroite in (dominodroite.__getdroite__(),'y'):                           
+                                dominojoueur.__setdroite__("x")
+                                dominodroite.__setdroite__("x")                    
                         print("Le joueur 1 a placé son domino à droite")
                         sleep(2)
                         break
@@ -337,8 +368,9 @@ class JeuDomino():
             while piece not in choixn:
                 piece = int(input("Erreur vous n'avez pas rentré un chiffre ou alors ce domino n'existe pas, veuillez entrer le bon numéro de domino ---->"))
             
-            valgauche = self.j2[piece - 1].__getgauche__()
-            valdroite = self.j2[piece - 1].__getdroite__()
+            dominojoueur=self.j2[piece - 1]
+            valgauche = dominojoueur.__getgauche__()
+            valdroite = dominojoueur.__getdroite__()  
             dominogauche = self.plateau[0]
             dominodroite = self.plateau[-1]
             
@@ -349,15 +381,31 @@ class JeuDomino():
                 while piece not in choixn:
                     piece = int(input("Erreur, veuillez entrer le numéro du domino ---->"))
                 
-                valgauche = self.j2[piece - 1].__getgauche__()
-                valdroite = self.j2[piece - 1].__getdroite__()                
+                dominojoueur=self.j1[piece - 1]
+                valgauche = dominojoueur.__getgauche__()
+                valdroite = dominojoueur.__getdroite__()                
             
             while True:
-                cote = input("De quel côté veux-tu placer le domino ? ---> gauche ou droite ")
+                cote = input("De quel côté veux-tu placer le domino ? ---> gauche ou droite (gauche c'est le domino d'en haut de la console la droite celui d'en bas)")
                 
                 if cote.lower() == "gauche":
                     if dominogauche.__getgauche__() in (valgauche, valdroite) or dominogauche.__getdroite__() in (valgauche, valdroite):
                         self.plateau.insert(0, self.j2.pop(piece - 1))
+                        if dominogauche.__getgauche__() in (valgauche,'y'):
+                            if valgauche in (dominogauche.__getgauche__(),'y'):
+                                dominojoueur.__setgauche__("x")
+                                dominogauche.__setgauche__("x")
+                            if valdroite in (dominogauche.__getgauche__(),'y'):                           
+                                dominojoueur.__setdroite__("x")
+                                dominogauche.__setgauche__("x")
+                                
+                        elif dominogauche.__getdroite__() in (valgauche, valdroite):
+                            if valgauche in (dominogauche.__getdroite__(),'y'):
+                                dominojoueur.__setgauche__("x")
+                                dominogauche.__setdroite__("x")
+                            if valdroite in (dominogauche.__getdroite__(),'y'):                           
+                                dominojoueur.__setdroite__("x")
+                                dominogauche.__setdroite__("x")                        
                         print("Le joueur 2 a placé son domino à gauche")
                         sleep(2)
                         break
@@ -368,7 +416,22 @@ class JeuDomino():
                 elif cote.lower() == 'droite':
                     if dominodroite.__getgauche__() in (valgauche, valdroite) or dominodroite.__getdroite__() in (valgauche, valdroite):
                         self.plateau.append(self.j2.pop(piece - 1))
-                        print("Le joueur 2 a placé son domino à gauche")
+                        if dominodroite.__getgauche__() in (valgauche,'y'):
+                            if valgauche in (dominodroite.__getgauche__(),'y'):
+                                dominojoueur.__setgauche__("x")
+                                dominodroite.__setgauche__("x")
+                            if valdroite in (dominodroite.__getgauche__(),'y'):                           
+                                dominojoueur.__setdroite__("x")
+                                dominodroite.__setgauche__("x")
+                                
+                        elif dominodroite.__getdroite__() in (valgauche, valdroite):
+                            if valgauche in (dominodroite.__getdroite__(),'y'):
+                                dominojoueur.__setgauche__("x")
+                                dominodroite.__setgauche__("x")
+                            if valdroite in (dominodroite.__getdroite__(),'y'):                           
+                                dominojoueur.__setdroite__("x")
+                                dominodroite.__setdroite__("x")                          
+                        print("Le joueur 2 a placé son domino à droite")
                         sleep(2)
                         break
                     
@@ -383,8 +446,9 @@ class JeuDomino():
     
     def jeu(self):
         
-        
         print("Bienvenue au jeu de domino ! Ce jeu ce joue a deux joueurs")
+        
+
         
         print(Fore.BLUE +"Initialisation du jeu...")
         
@@ -405,7 +469,6 @@ class JeuDomino():
         self.plateau.append(pioche.pop())
         
         sleep(1)
-        
         print("Le jeu peut maintenant commencer :")
         
         while True:
@@ -421,15 +484,10 @@ class JeuDomino():
         
         else:
             print(Fore.YELLOW,"Bravo, le joueur 2 a gagné !",Fore.WHITE)
-        
-        
-        
-        
-        
-        
-        
+            
 
-
+            
+        
 pioche = [Domino(i, j) for i in range(7) for j in range(i, 7)]
 jeu = JeuDomino(pioche)
 jeu.jeu()
